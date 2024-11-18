@@ -1,18 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Atletas Botafogo</title>
     <link rel="stylesheet" href="style.css">
-    <script src="md5-min.js"></script>
+    <script src="sha256.js"></script>
     <script src="codigo.js" defer></script>
+
 </head>
 <body>
-    <input type="password" id="senha">
-    <button id="botao">Tentar</button>
-    <button id="logout">Logout</button>
-    <div id="container" class="container">
+        <!-- Página de Login -->
+        <div id="pagina-login">
+          <h1>Atletas do Botafogo em 2024-1</h1>
+          <p>Criado com objetivos exclusivamente didáticos para a disciplina Desenvolvimento Web do Ibmec Rio.</p>
+          <input type="password" id="senha" placeholder="Informe a senha." onChange={handleInputChange}>
+          <button id="botao">Entrar</button>
+          <p>Efetue login com a senha: IBMECRIO</p>
+        </div>
 
-    </div>
-</body>
+
+        <!-- Página Protegida -->
+        <div id="pagina-protegida" >
+          <header>
+            <h1>Atletas Botafogo 2024-1</h1>
+            <button id="logout">Sair</button>
+          </header>
+          <div>
+            <button id="masculino">Masculino</button>
+            <button id="feminino">Feminino</button>
+            <button id="todos">Elenco Completo</button>
+            <input type="text" id="busca" placeholder="BUSQUE POR NOME">
+          </div>
+          <div id="container"></div>
+        </div>
+
+        <script src="codigo.js"></script>
+      </body>
+
+</html>

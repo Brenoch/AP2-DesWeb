@@ -14,3 +14,7 @@
 #container img{
     width: 100%;
 }
+
+.pagina-protegida{
+    display: none;
+}
