@@ -1,5 +1,5 @@
 
-/* 
+/*
 Elenco x
 
 imagem x
@@ -39,11 +39,10 @@ const achaCookie = (chave) => {
     return par.split('=')[1];
 }
 
-
 const montaPagina = (dados) => {
     const body = document.body;
     body.innerHTML = '';
-    
+
     const nome = document.createElement('h1');
     nome.innerHTML = dados.nome;
     body.appendChild(nome);
@@ -54,28 +53,27 @@ const montaPagina = (dados) => {
     body.appendChild(imagem);
 
     const nJogos = document.createElement('p');
-    nJogos.innerText = dados.n_jogos;
+    nJogos.innerText = `Jogos pelo Botafogo: ${dados.n_jogos || "Não informado"}`;
     body.appendChild(nJogos);
 
     const elenco = document.createElement('p');
-    elenco.innerText = dados.elenco;
+    elenco.innerText = `Genero:  ${dados.elenco || "Não informado"}`;
     body.appendChild(elenco);
 
     const noTimeDesde = document.createElement('p');
-    noTimeDesde.innerText = dados.no_botafogo_desde;
+    noTimeDesde.innerText = `No Botafogo desde: ${dados.no_botafogo_desde || "Não informado"}`;
     body.appendChild(noTimeDesde);
 
     const posicao = document.createElement('p');
-    posicao.innerText = dados.posicao;
+    posicao.innerText = `Função: ${dados.posicao || "Não informado"}`;
     body.appendChild(posicao);
 }
+
 
 if(sessionStorage.getItem("logado")){
     pega_json(`https://botafogo-atletas.mange.li/2024-1/${id}`).then(
         (r) => montaPagina(r)
     );
 } else {
-    document.body.innerHTML = "<h1>Você precisa estar logado para ter acesso</h1>"
+    document.body.innerHTML = "<h1>Você precisa estar logado para ter acesso</h1>";
 }
-
-

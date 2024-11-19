@@ -25,7 +25,16 @@ const carregarConteudoProtegido = (genero) => {
 
 const atualizarJogadores = (jogadores) => {
     container.innerHTML = "";
-    jogadores.forEach((jogador) => container.appendChild(montaCard(jogador)));
+
+    const totalJogadores = Math.ceil(jogadores.length / 5) * 5;
+
+    for (let i = 0; i < totalJogadores; i++) {
+        if (i < jogadores.length) {
+            container.appendChild(montaCard(jogadores[i]));
+        } else {
+            container.appendChild(criaPlaceholder());
+        }
+    }
 };
 
 const manipulaCLick = (e) => {
@@ -68,7 +77,6 @@ const montaCard = (atleta) => {
     imagem.alt = atleta.nome;
     cartao.appendChild(imagem);
 
-    detalhes.innerHTML = `Posição: ${atleta.posicao}<br>Nº Jogos: ${atleta.n_jogos}`;
     cartao.appendChild(detalhes);
 
     cartao.dataset.id = atleta.id;
@@ -77,6 +85,13 @@ const montaCard = (atleta) => {
     cartao.onclick = manipulaCLick;
 
     return cartao;
+};
+
+const criaPlaceholder = () => {
+    const placeholder = document.createElement("article");
+    placeholder.style.visibility = "hidden";
+    placeholder.style.pointerEvents = "none";
+    return placeholder;
 };
 
 const handleInputChange = () => {

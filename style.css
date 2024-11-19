@@ -1,20 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.cdnfonts.com/css/blue-ridge');
 #container {
     display: flex;
     flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+
 }
 
 #container > article {
-    width: 20rem;
-    border: solid rebeccapurple 1px;
+    border: solid black 7px;
+    background-color: #d3d3d3;
     border-radius: 10px;
-    margin: .5rem;
-    padding: .3rem;
+    margin: 0.5rem;
+    padding: 0.10rem;
+    transition: transform 0.2s ease;
 }
 
-#container img{
+#container img {
     width: 100%;
+    height: auto;
+
 }
 
-.pagina-protegida{
+#container > article:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #container > article {
+        width: calc(100% - 2rem);/
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    #container > article {
+        width: calc(33.3333% - 2rem);
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1300px) {
+    #container > article {
+        width: calc(25% - 2rem);
+    }
+}
+
+@media (min-width: 1301px) {
+    #container > article {
+        width: calc(20% - 2rem);
+    }
+}
+
+
+.pagina-login {
+    text-align: center;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    width: 300px;
+    background-color: #f9f9f9;
+}
+#senha {
+    margin-top: 5px;
+    padding: 10px;
+    width: 15%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#botao {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.pagina-login input,
+.pagina-login button {
+    margin: 0.5rem 0;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 20rem;
+}
+
+.montapag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    min-height: 100vh;
+}
+
+.pagina-detalhes img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.select-elenco {
     display: none;
+}
+
+@media (max-width: 768px) {
+    .select-elenco {
+        display: block;
+        margin: 1rem auto;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        max-width: 20rem;
+    }
+
+    .botoes-elenco {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .botoes-elenco {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .select-elenco {
+        display: none;
+    }
+}
+
+body {
+    margin: 0;
+    font-family: 'Blue Ridge', sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+input:focus,
+button:focus {
+    outline: none;
+    border-color: rebeccapurple;
+}
+
+#container > article div {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    margin-top: 0.5rem;
+}
+
+h1{
+    font-family: 'Blue Ridge', sans-serif;
+
+}
+
+.p2{
+    font-family: 'Roboto', sans-serif;
+    color: black
+    ;
 }
