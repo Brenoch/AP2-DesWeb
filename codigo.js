@@ -3,35 +3,42 @@ const url = "https://botafogo-atletas.mange.li/2024-1/";
 const container = document.getElementById("container");
 const paginaLogin = document.getElementById("pagina-login");
 const paginaProtegida = document.getElementById("pagina-protegida");
+const inputBusca = document.getElementById("busca");
 
+let jogadoresAtuais = [];
+let generoSelecionado = null;
 
 const carregarConteudoProtegido = (genero) => {
-    paginaLogin.style.display = "none";
-    paginaProtegida.style.display = "";
-    container.style.display = "";
+    generoSelecionado = genero;
 
     pega_json(`${url}${genero}`).then((jogadores) => {
-        container.innerHTML = "";
-        jogadores.forEach((jogador) => container.appendChild(montaCard(jogador)));
+        jogadoresAtuais = jogadores;
+        if (jogadoresAtuais.length > 0) {
+            atualizarJogadores(jogadoresAtuais);
+            container.style.display = "flex";
+        } else {
+            container.style.display = "none";
+            alert("Nenhum jogador encontrado para o gênero selecionado.");
+        }
     });
 };
 
+const atualizarJogadores = (jogadores) => {
+    container.innerHTML = "";
+    jogadores.forEach((jogador) => container.appendChild(montaCard(jogador)));
+};
 
 const manipulaCLick = (e) => {
     const id = e.currentTarget.dataset.id;
     const redirecionaUrl = `atleta.html?id=${id}`;
 
-
     localStorage.setItem("id", id);
     localStorage.setItem("dados", JSON.stringify(e.currentTarget.dataset));
-
-
     sessionStorage.setItem("id", id);
     sessionStorage.setItem("dados", JSON.stringify(e.currentTarget.dataset));
 
     window.location.href = redirecionaUrl;
 };
-
 
 const pega_json = async (caminho) => {
     try {
@@ -44,12 +51,11 @@ const pega_json = async (caminho) => {
     }
 };
 
-
 const montaCard = (atleta) => {
     const cartao = document.createElement("article");
     const nome = document.createElement("h1");
     const imagem = document.createElement("img");
-    const descricao = document.createElement("p");
+    const detalhes = document.createElement("p");
 
     nome.innerText = atleta.nome;
     nome.style.fontFamily = "sans-serif";
@@ -59,53 +65,58 @@ const montaCard = (atleta) => {
     imagem.alt = atleta.nome;
     cartao.appendChild(imagem);
 
-    descricao.innerHTML = atleta.detalhes;
-    cartao.appendChild(descricao);
-
-    cartao.dataset.id = atleta.id;
-    cartao.dataset.nJogos = atleta.n_jogos;
-
     cartao.onclick = manipulaCLick;
 
     return cartao;
 };
 
+const handleInputChange = () => {
+    const termoBusca = inputBusca.value.toLowerCase().trim();
+
+    const jogadoresFiltrados = jogadoresAtuais.filter(
+        (jogador) =>
+            jogador.nome.toLowerCase().includes(termoBusca) ||
+            String(jogador.id).includes(termoBusca)
+    );
+
+    if (jogadoresFiltrados.length > 0) {
+        atualizarJogadores(jogadoresFiltrados);
+        container.style.display = "flex";
+    } else {
+        container.style.display = "none";
+    }
+};
 
 const manipulaBotao = () => {
     const texto = document.getElementById("senha").value;
     if (hex_sha256(texto) === "0f9635f18ff292e7e7db650e1157ca2a8d3a0a90483a5ad53ce64571c11918be") {
         sessionStorage.setItem("logado", "true");
         alert("Login bem-sucedido!");
-        carregarConteudoProtegido("feminino");
+        inicializarPaginaProtegida();
     } else {
         alert("Senha incorreta");
     }
 };
 
-
 const manipulaLogout = () => {
     sessionStorage.removeItem("logado");
-
-    paginaProtegida.style.display = "none";
-    paginaLogin.style.display = "";
-
     location.reload();
 };
 
-
-const verificalogin = () => {
+const inicializarPaginaProtegida = () => {
     if (sessionStorage.getItem("logado") === "true") {
-        carregarConteudoProtegido("feminino");
+        paginaLogin.style.display = "none";
+        paginaProtegida.style.display = "block";
+        container.style.display = "none";
     } else {
-        paginaLogin.style.display = "";
+        paginaLogin.style.display = "block";
         paginaProtegida.style.display = "none";
+        container.style.display = "none";
     }
 };
 
-
 document.addEventListener("DOMContentLoaded", () => {
-    paginaLogin.style.display = "";
-    paginaProtegida.style.display = "none";
+    inicializarPaginaProtegida();
 
     document.getElementById("botao").onclick = manipulaBotao;
     document.getElementById("logout").onclick = manipulaLogout;
@@ -122,5 +133,5 @@ document.addEventListener("DOMContentLoaded", () => {
         carregarConteudoProtegido("all");
     });
 
-    verificalogin();
+    inputBusca.addEventListener("input", handleInputChange);
 });
