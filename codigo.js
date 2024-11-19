@@ -32,6 +32,9 @@ const manipulaCLick = (e) => {
     const id = e.currentTarget.dataset.id;
     const redirecionaUrl = `atleta.html?id=${id}`;
 
+    console.log("ID do Atleta:", id);
+    console.log("Dataset completo:", e.currentTarget.dataset);
+
     localStorage.setItem("id", id);
     localStorage.setItem("dados", JSON.stringify(e.currentTarget.dataset));
     sessionStorage.setItem("id", id);
@@ -65,6 +68,12 @@ const montaCard = (atleta) => {
     imagem.alt = atleta.nome;
     cartao.appendChild(imagem);
 
+    detalhes.innerHTML = `Posição: ${atleta.posicao}<br>Nº Jogos: ${atleta.n_jogos}`;
+    cartao.appendChild(detalhes);
+
+    cartao.dataset.id = atleta.id;
+    cartao.dataset.nJogos = atleta.n_jogos;
+
     cartao.onclick = manipulaCLick;
 
     return cartao;
@@ -91,7 +100,6 @@ const manipulaBotao = () => {
     const texto = document.getElementById("senha").value;
     if (hex_sha256(texto) === "0f9635f18ff292e7e7db650e1157ca2a8d3a0a90483a5ad53ce64571c11918be") {
         sessionStorage.setItem("logado", "true");
-        alert("Login bem-sucedido!");
         inicializarPaginaProtegida();
     } else {
         alert("Senha incorreta");
