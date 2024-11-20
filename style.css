@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
 @import url('https://fonts.cdnfonts.com/css/blue-ridge');
+
 #container {
     display: flex;
     flex-wrap: wrap;
@@ -8,7 +9,7 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 1rem;
-
+    box-sizing: border-box;
 }
 
 #container > article {
@@ -18,12 +19,13 @@
     margin: 0.5rem;
     padding: 0.10rem;
     transition: transform 0.2s ease;
+    flex: 1 1 calc(100% - 2rem); 
+
 }
 
 #container img {
     width: 100%;
     height: auto;
-
 }
 
 #container > article:hover {
@@ -31,38 +33,41 @@
     cursor: pointer;
 }
 
+#pagina-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+}
 @media (max-width: 768px) {
     #container > article {
-        width: calc(100% - 2rem);/
+        flex: 1 1 calc(100% - 2rem);
     }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
     #container > article {
-        width: calc(33.3333% - 2rem);
+        flex: 1 1 calc(33.3333% - 2rem);
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1300px) {
     #container > article {
-        width: calc(25% - 2rem);
+        flex: 1 1 calc(25% - 2rem);
     }
 }
 
 @media (min-width: 1301px) {
     #container > article {
-        width: calc(20% - 2rem);
+        flex: 1 1 calc(20% - 2rem);
     }
-}
-
-
-.pagina-login {
-    text-align: center;
-    padding: 20px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    width: 300px;
-    background-color: #f9f9f9;
 }
 #senha {
     margin-top: 5px;
@@ -75,24 +80,84 @@
 #botao {
     margin-top: 10px;
     padding: 10px;
-    background-color: #0056b3;
+    background-color: black;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
+.pagina-login input {
+    padding: 50px;
+    width: 100px;
+}
 
+.pagina-login button{
+    margin-top: 10px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
 
-.pagina-login input,
-.pagina-login button {
-    margin: 0.5rem 0;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #808080;
+    padding: 1rem;
+    color: white;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-family: 'Blue Ridge', sans-serif;
+}
+
+header button {
+    display: flex;
+    background-color: black;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+header button:hover {
+    background-color: #444;
+}
+
+#pagina-protegida > div > button {
+    background-color: black;
+    color: white;
+    padding: 1rem 1.5rem;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#pagina-protegida > div > button:hover {
+    background-color: #444;
+}
+
+#busca {
+    display: block;
+    margin: 1rem auto;
     padding: 0.8rem;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 100%;
     max-width: 20rem;
+    text-align: center;
 }
 
 .montapag {
@@ -104,42 +169,8 @@
     min-height: 100vh;
 }
 
-.pagina-detalhes img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
 .select-elenco {
     display: none;
-}
-
-@media (max-width: 768px) {
-    .select-elenco {
-        display: block;
-        margin: 1rem auto;
-        padding: 0.5rem;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-        max-width: 20rem;
-    }
-
-    .botoes-elenco {
-        display: none;
-    }
-}
-
-@media (min-width: 769px) {
-    .botoes-elenco {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .select-elenco {
-        display: none;
-    }
 }
 
 body {
@@ -150,6 +181,7 @@ body {
 button {
     cursor: pointer;
 }
+
 input:focus,
 button:focus {
     outline: none;
@@ -163,13 +195,7 @@ button:focus {
     margin-top: 0.5rem;
 }
 
-h1{
-    font-family: 'Blue Ridge', sans-serif;
-
-}
-
-.p2{
+.p2 {
     font-family: 'Roboto', sans-serif;
-    color: black
-    ;
+    color: black;
 }

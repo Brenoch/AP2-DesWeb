@@ -18,8 +18,10 @@ const carregarConteudoProtegido = (genero) => {
             container.style.display = "flex";
         } else {
             container.style.display = "none";
-            alert("Nenhum jogador encontrado para o gênero selecionado.");
+            exibirMensagemErro("Nenhum jogador encontrado para o gênero selecionado.");
         }
+    }).catch(() => {
+        exibirMensagemErro("Erro ao carregar os dados. Por favor, tente novamente mais tarde.");
     });
 };
 
@@ -37,12 +39,14 @@ const atualizarJogadores = (jogadores) => {
     }
 };
 
+const exibirMensagemErro = (mensagem) => {
+    container.innerHTML = `<div style="color: red; text-align: center; margin-top: 20px;">${mensagem}</div>`;
+    container.style.display = "block";
+};
+
 const manipulaCLick = (e) => {
     const id = e.currentTarget.dataset.id;
     const redirecionaUrl = `atleta.html?id=${id}`;
-
-    console.log("ID do Atleta:", id);
-    console.log("Dataset completo:", e.currentTarget.dataset);
 
     localStorage.setItem("id", id);
     localStorage.setItem("dados", JSON.stringify(e.currentTarget.dataset));
@@ -59,7 +63,7 @@ const pega_json = async (caminho) => {
         return dados;
     } catch (error) {
         console.error("Erro ao buscar JSON:", error);
-        return [];
+        throw error;
     }
 };
 
